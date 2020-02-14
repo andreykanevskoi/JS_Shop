@@ -15,3 +15,7 @@ New structure of project:
 Code changes:
 * ```server.js``` - new modules added;
 * ```app/routes/user_routes.js``` - implemented CRUD for USER entity.
+
+## UPD #2
+### 14.02.2020 16:23
+Migrated to new structure of project.

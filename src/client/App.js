@@ -1,22 +1,39 @@
 import React, { Component } from 'react';
 import './app.css';
-import ReactImage from './react.png';
+import { DataTable, TableHeader } from 'react-mdl';
+// import ReactImage from "./react.png";
 
 export default class App extends Component {
-  state = { username: null };
+  state = {
+    id: -1,
+    email: ''
+    // db_opr: '',
+    // status: false
+  };
 
   componentDidMount() {
-    fetch('/api/getUsername')
+    fetch('/users/1')
       .then(res => res.json())
-      .then(user => this.setState({ username: user.username }));
+      .then(user => this.setState({
+        id: user.id,
+        // db_opr: user.db_opr,
+        // status: user.status,
+        email: user.email
+      }));
   }
 
   render() {
-    const { username } = this.state;
+    const userObj = this.state;
     return (
       <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
+        <DataTable shadow={0} rows={[{ id: userObj.id, email: userObj.email }]}>
+          <TableHeader numeric name="id" tooltip="Unique user's number">
+            USER_ID
+          </TableHeader>
+          <TableHeader name="email" tooltip="User's email">
+            USER_EMAIL
+          </TableHeader>
+        </DataTable>
       </div>
     );
   }
