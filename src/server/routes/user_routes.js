@@ -1,0 +1,65 @@
+function userRoutes(app, db) {
+  app.put('/users/:id', (req, res) => {
+    const user = {
+      id: req.params.id,
+      email: req.body.email,
+      pw: req.body.pw
+    };
+    const sqlQuery = `UPDATE SHOP.USER 
+        SET USER_EMAIL='${user.email}', 
+        USER_PASSWORD='${user.pw}' 
+        WHERE USER_ID=${user.id}`;
+
+    db.query(sqlQuery, (err) => {
+      if (err) {
+        res.send({ id: user.id, db_opr: 'UPDATE', status: false });
+      } else {
+        res.send({ id: user.id, db_opr: 'UPDATE', status: true });
+      }
+    });
+  });
+
+  app.delete('/users/:id', (req, res) => {
+    const { id } = req.params;
+    const sqlQuery = `DELETE FROM SHOP.USER WHERE USER_ID = ${id};`;
+    db.query(sqlQuery, (err) => {
+      if (err) {
+        res.send({ id, db_opr: 'DELETE', status: false });
+      } else {
+        res.send({ id, db_opr: 'DELETE', status: true });
+      }
+    });
+  });
+
+  app.get('/users/:id', (req, res) => {
+    const { id } = req.params;
+    const sqlQuery = `SELECT USER_ID, USER_EMAIL FROM SHOP.USER WHERE USER_ID = ${id};`;
+    db.query(sqlQuery, (err, result) => {
+      if (err) {
+        res.send({ id, db_opr: 'SELECT', status: false });
+      } else {
+        const item = JSON.parse(JSON.stringify(result[0]));
+        res.send({
+          id: item.USER_ID, email: item.USER_EMAIL, db_opr: 'SELECT', status: true
+        });
+      }
+    });
+  });
+
+  app.post('/users', (req, res) => {
+    const user = {
+      email: req.body.email,
+      pw: req.body.pw
+    };
+    const sqlQuery = `INSERT INTO SHOP.USER (USER_EMAIL, USER_PASSWORD) VALUES ('${user.email}', '${user.pw}');`;
+    db.query(sqlQuery, (err, result) => {
+      if (err) {
+        res.send({ email: user.email, db_opr: 'INSERT', status: false });
+      } else {
+        res.send({ id: result.insertId, db_opr: 'INSERT', status: true });
+      }
+    });
+  });
+}
+
+module.exports = userRoutes;
