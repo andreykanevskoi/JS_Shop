@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const connection = mysql.createConnection(dbConfig);
 
-// eslint-disable-next-line consistent-return
 connection.connect((err) => {
   if (err) return console.log(err);
   findRoute(app, connection);
