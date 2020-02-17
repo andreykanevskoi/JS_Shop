@@ -38,7 +38,7 @@ export default class Menu extends Component {
                                 <p>Гость</p>
                             </div>
                             <div>
-                                <Button colored onClick={this.handleOpenDialog} raised ripple>Войти</Button>
+                                <Button colored onClick={this.handleOpenDialog} onBlur={this.handleCloseDialog}  raised ripple>Войти</Button>
                                 <Dialog open={this.state.openDialog}>
                                     <DialogTitle>Вход</DialogTitle>
                                     <DialogContent>
@@ -58,8 +58,9 @@ export default class Menu extends Component {
                                         </div>
                                     </DialogContent>
                                     <DialogActions fullWidth>
-                                        <Button type='button' style={{ textAlign: 'center' }}>Войти</Button>
-                                        <Button type='button' style={{ textAlign: 'center' }} onClick={this.handleCloseDialog}>Зарегистрироваться</Button>
+                                        <Button raised accent ripple style={{marginBottom: '5px', textAlign: 'center'}}>Войти</Button>
+                                        <Button raised accent ripple style={{marginBottom: '5px', textAlign: 'center'}}>Зарегистрироваться</Button>
+                                        <Button ripple style={{textAlign: 'center'}} onClick={this.handleCloseDialog}>Закрыть</Button>
                                     </DialogActions>
                                 </Dialog>
                             </div>
