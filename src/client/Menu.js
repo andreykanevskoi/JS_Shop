@@ -9,6 +9,8 @@ import 'react-mdl/extra/material';
 import 'react-mdl/extra/material.css';
 import Table from './Table'
 
+var ReactDOM = require('react-dom');
+
 export default class Menu extends Component {
     constructor(props) {
         super(props);
@@ -31,6 +33,19 @@ export default class Menu extends Component {
         });
     }
 
+
+    // handleSendAuthRequest() {
+    //     fetch('/api/auth', {email: ReactDOM.findDOMNode)
+    //         .then(res => res.json())
+    //         .then(
+    //             (result) => {
+    //                 this.setState({ products: result.products });
+    //             },
+    //             (err) => {
+    //                 this.setState({ products: null, status: false, error: err });
+    //             });
+    // }
+
     render() {
         return (
             <div className="demo-big-content">
@@ -47,6 +62,7 @@ export default class Menu extends Component {
                                     <DialogContent>
                                         <div>
                                             <Textfield
+                                                id="txtEmail"
                                                 onChange={() => { }}
                                                 label=""
                                                 style={{ width: '230px' }}
@@ -54,6 +70,7 @@ export default class Menu extends Component {
                                         </div>
                                         <div>
                                             <Textfield
+                                                id="txtPassword"
                                                 onChange={() => { }}
                                                 label=""
                                                 style={{ width: '230px' }}
