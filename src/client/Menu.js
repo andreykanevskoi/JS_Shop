@@ -7,11 +7,14 @@ import {
 
 import 'react-mdl/extra/material';
 import 'react-mdl/extra/material.css';
+import Table from './Table'
 
 export default class Menu extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            user: "guest"
+        };
         this.handleOpenDialog = this.handleOpenDialog.bind(this);
         this.handleCloseDialog = this.handleCloseDialog.bind(this);
     }
@@ -34,11 +37,11 @@ export default class Menu extends Component {
                 <Layout>
                     <Header title="Мой магазин" waterfall>
                         <Navigation>
-                            <div style={{display: 'flex', alignItems: 'center'}}>
-                                <p>Гость</p>
+                            <div >
+                                <p style={{ margin: '0 auto' }}>Вы вошли как <u>{this.state.user}</u></p>
                             </div>
                             <div>
-                                <Button colored onClick={this.handleOpenDialog} onBlur={this.handleCloseDialog}  raised ripple>Войти</Button>
+                                <Button colored onClick={this.handleOpenDialog} raised ripple>Войти</Button>
                                 <Dialog open={this.state.openDialog}>
                                     <DialogTitle>Вход</DialogTitle>
                                     <DialogContent>
@@ -58,16 +61,16 @@ export default class Menu extends Component {
                                         </div>
                                     </DialogContent>
                                     <DialogActions fullWidth>
-                                        <Button raised accent ripple style={{marginBottom: '5px', textAlign: 'center'}}>Войти</Button>
-                                        <Button raised accent ripple style={{marginBottom: '5px', textAlign: 'center'}}>Зарегистрироваться</Button>
-                                        <Button ripple style={{textAlign: 'center'}} onClick={this.handleCloseDialog}>Закрыть</Button>
+                                        <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center' }}>Войти</Button>
+                                        <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center' }}>Зарегистрироваться</Button>
+                                        <Button ripple style={{ textAlign: 'center' }} onClick={this.handleCloseDialog}>Закрыть</Button>
                                     </DialogActions>
                                 </Dialog>
                             </div>
                         </Navigation>
                     </Header>
                     <Content>
-                        <div id='table' className="root" />
+                        <Table />
                     </Content>
                 </Layout>
             </div>

@@ -14,21 +14,26 @@ export default class Table extends Component {
   }
 
   componentDidMount() {
-    fetch('/products')
+    fetch('/api/products')
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({ products: result.products });
         },
         (err) => {
-          // this.setState({ products: null, status: false, error: err });
+          this.setState({ products: null, status: false, error: err });
         });
   }
 
   render() {
     var productsState = this.state;
     var data = productsState.products;
-    
+    data.push({
+      PRODUCT_ID: 777,
+      PRODUCT_NAME: 'EMPTY_NAME',
+      PRODUCT_DESC: 'EMPTY_DESC'
+    })
+
     for (var i = 0; i < 100; i++) {
       data.push({
         PRODUCT_ID: 0,
@@ -39,15 +44,15 @@ export default class Table extends Component {
 
     return (
       <div>
-      <DataTable shadow={0} rows={data} style={{width: '100%'}}>
+        <DataTable shadow={0} rows={data} style={{ width: '100%' }}>
           <TableHeader numeric name="PRODUCT_ID" tooltip="Артикул">
-              PRODUCT_ID
+            PRODUCT_ID
           </TableHeader>
           <TableHeader name="PRODUCT_NAME" tooltip="Название товара">
-              PRODUCT_NAME
+            PRODUCT_NAME
           </TableHeader>
           <TableHeader name="PRODUCT_DESC" tooltip="Описание товара">
-              PRODUCT_DESC
+            PRODUCT_DESC
           </TableHeader>
         </DataTable>
       </div>
