@@ -60,6 +60,34 @@ function userRoutes(app, db) {
       }
     });
   });
+
+  app.get('/auth', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const sqlQuery = `SELECT USER_ID, USER_EMAIL FROM SHOP.USER WHERE USER_EMAIL = "${email}" AND USER_PASSWORD = "${password}";`;
+    db.query(sqlQuery, (err, result) => {
+      if (err) {
+        res.send({ id, db_opr: 'SELECT', status: false, msg: 'db error' });
+      } 
+      else {
+        if (result[0] == undefined) {
+          res.send({
+            id: null, email: email, db_opr: 'SELECT', status: false, msg: "user doesn't exist"
+          });
+          return;
+        }
+        const item = JSON.parse(JSON.stringify(result[0]));
+        if (item != undefined)
+          res.send({
+            id: item.USER_ID, email: item.USER_EMAIL, db_opr: 'SELECT', status: true
+          });
+      }
+    });
+
+
+
+  })
 }
 
 module.exports = userRoutes;
