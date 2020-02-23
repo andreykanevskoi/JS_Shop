@@ -7,9 +7,11 @@ import {
 
 import 'react-mdl/extra/material';
 import 'react-mdl/extra/material.css';
-import Table from './Table'
 
-var ReactDOM = require('react-dom');
+import UserTitle from './UserTitle';
+import Table from './Table';
+
+const ReactDOM = require('react-dom');
 
 export default class Menu extends Component {
     constructor(props) {
@@ -23,10 +25,19 @@ export default class Menu extends Component {
         };
 
         this.handleSendAuthRequest = this.handleSendAuthRequest.bind(this);
+
         this.handlePasswordTextfieldChange = this.handlePasswordTextfieldChange.bind(this);
         this.handleEmailTextfieldChange = this.handleEmailTextfieldChange.bind(this);
+
+        this.handleNewPasswordTextfieldChange = this.handleNewPasswordTextfieldChange.bind(this);
+        this.handleNewEmailTextfieldChange = this.handleNewEmailTextfieldChange.bind(this);
+
         this.handleOpenDialog = this.handleOpenDialog.bind(this);
         this.handleCloseDialog = this.handleCloseDialog.bind(this);
+
+        this.handleOpenSignUpDialog = this.handleOpenSignUpDialog.bind(this);
+        this.handleCloseSignUpDialog = this.handleCloseSignUpDialog.bind(this);
+
         this.handlebtnSignInAction = this.handlebtnSignInAction.bind(this);
     }
 
@@ -42,12 +53,32 @@ export default class Menu extends Component {
         });
     }
 
+    handleOpenSignUpDialog() {
+        this.setState({
+            openSignUpDialog: true
+        });
+    }
+
+    handleCloseSignUpDialog() {
+        this.setState({
+            openSignUpDialog: false
+        });
+    }
+
     handleEmailTextfieldChange(event) {
         this.setState({ email: event.target.value });
     }
 
     handlePasswordTextfieldChange(event) {
         this.setState({ pw: event.target.value });
+    }
+
+    handleNewEmailTextfieldChange(event) {
+        this.setState({ newEmail: event.target.value });
+    }
+
+    handleNewPasswordTextfieldChange(event) {
+        this.setState({ newPw: event.target.value });
     }
 
     handleSendAuthRequest() {
@@ -90,9 +121,7 @@ export default class Menu extends Component {
                 <Layout>
                     <Header title="Мой магазин" waterfall>
                         <Navigation>
-                            <div >
-                                <p style={{ margin: '0 auto' }}>Вы вошли как <u>{this.state.user}</u></p>
-                            </div>
+                            <UserTitle value={this.state.user}/>
                             <div>
                                 <Button colored onClick={this.handlebtnSignInAction} raised ripple>{this.state.btnSignInActionName}</Button>
                                 <Dialog open={this.state.openDialog}>
@@ -117,8 +146,33 @@ export default class Menu extends Component {
                                     </DialogContent>
                                     <DialogActions fullWidth>
                                         <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center' }} onClick={this.handleSendAuthRequest}>Войти</Button>
-                                        <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center' }}>Зарегистрироваться</Button>
+                                        <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center' }} onClick={this.handleOpenSignUpDialog}>Зарегистрироваться</Button>
                                         <Button ripple style={{ textAlign: 'center' }} onClick={this.handleCloseDialog}>Закрыть</Button>
+                                    </DialogActions>
+                                </Dialog>
+                                <Dialog open={this.state.openSignUpDialog}>
+                                    <DialogTitle>Регистрация</DialogTitle>
+                                    <DialogContent>
+                                        <div>
+                                            <Textfield
+                                                id="txtNewEmail"
+                                                onChange={this.handleNewEmailTextfieldChange}
+                                                label=""
+                                                style={{ width: '230px' }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <Textfield
+                                                id="txtPassword"
+                                                onChange={this.handleNewPasswordTextfieldChange}
+                                                label=""
+                                                style={{ width: '230px' }}
+                                            />
+                                        </div>
+                                    </DialogContent>
+                                    <DialogActions fullWidth>
+                                        <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center' }}>Зарегистрироваться</Button>
+                                        <Button ripple style={{ textAlign: 'center' }} onClick={this.handleCloseSignUpDialog}>Закрыть</Button>
                                     </DialogActions>
                                 </Dialog>
                             </div>
