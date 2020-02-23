@@ -44,7 +44,13 @@ export default class Table extends Component {
 
     return (
       <div>
-        <DataTable shadow={0} rows={data} style={{ width: '100%' }}>
+        <DataTable 
+          selectable 
+          shadow={0} 
+          rows={data} 
+          style={{ width: '50%' }}
+          rowKeyColumn='PRODUCT_ID'
+          >
           <TableHeader numeric name="PRODUCT_ID" tooltip="Артикул">
             PRODUCT_ID
           </TableHeader>

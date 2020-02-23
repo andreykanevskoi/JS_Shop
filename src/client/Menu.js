@@ -15,10 +15,19 @@ export default class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: "guest"
+            isLogin: false,
+            user: "guest",
+            email: "",
+            pw: "",
+            btnSignInActionName: "Войти"
         };
+
+        this.handleSendAuthRequest = this.handleSendAuthRequest.bind(this);
+        this.handlePasswordTextfieldChange = this.handlePasswordTextfieldChange.bind(this);
+        this.handleEmailTextfieldChange = this.handleEmailTextfieldChange.bind(this);
         this.handleOpenDialog = this.handleOpenDialog.bind(this);
         this.handleCloseDialog = this.handleCloseDialog.bind(this);
+        this.handlebtnSignInAction = this.handlebtnSignInAction.bind(this);
     }
 
     handleOpenDialog() {
@@ -33,18 +42,47 @@ export default class Menu extends Component {
         });
     }
 
+    handleEmailTextfieldChange(event) {
+        this.setState({ email: event.target.value });
+    }
 
-    // handleSendAuthRequest() {
-    //     fetch('/api/auth', {email: ReactDOM.findDOMNode)
-    //         .then(res => res.json())
-    //         .then(
-    //             (result) => {
-    //                 this.setState({ products: result.products });
-    //             },
-    //             (err) => {
-    //                 this.setState({ products: null, status: false, error: err });
-    //             });
-    // }
+    handlePasswordTextfieldChange(event) {
+        this.setState({ pw: event.target.value });
+    }
+
+    handleSendAuthRequest() {
+        const txtEmail = this.state.email;
+        const txtPw = this.state.pw;
+        const data = { email: txtEmail, password: txtPw };
+        fetch('api/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+            .then(
+                (result) => {
+                    if (result.status)
+                        this.setState({ user: txtEmail, openDialog: false, isLogin: true, btnSignInActionName: 'Выйти' });
+                    else
+                        alert(result.msg);
+                },
+                (err) => {
+                    alert('Error!');
+                });
+    }
+
+    handlebtnSignInAction() {
+        if (this.state.isLogin)
+            this.setState({
+                isLogin: false,
+                user: "guest",
+                btnSignInActionName: "Войти"
+            })
+        else
+            this.handleOpenDialog();
+    }
 
     render() {
         return (
@@ -56,14 +94,14 @@ export default class Menu extends Component {
                                 <p style={{ margin: '0 auto' }}>Вы вошли как <u>{this.state.user}</u></p>
                             </div>
                             <div>
-                                <Button colored onClick={this.handleOpenDialog} raised ripple>Войти</Button>
+                                <Button colored onClick={this.handlebtnSignInAction} raised ripple>{this.state.btnSignInActionName}</Button>
                                 <Dialog open={this.state.openDialog}>
                                     <DialogTitle>Вход</DialogTitle>
                                     <DialogContent>
                                         <div>
                                             <Textfield
                                                 id="txtEmail"
-                                                onChange={() => { }}
+                                                onChange={this.handleEmailTextfieldChange}
                                                 label=""
                                                 style={{ width: '230px' }}
                                             />
@@ -71,14 +109,14 @@ export default class Menu extends Component {
                                         <div>
                                             <Textfield
                                                 id="txtPassword"
-                                                onChange={() => { }}
+                                                onChange={this.handlePasswordTextfieldChange}
                                                 label=""
                                                 style={{ width: '230px' }}
                                             />
                                         </div>
                                     </DialogContent>
                                     <DialogActions fullWidth>
-                                        <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center' }}>Войти</Button>
+                                        <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center' }} onClick={this.handleSendAuthRequest}>Войти</Button>
                                         <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center' }}>Зарегистрироваться</Button>
                                         <Button ripple style={{ textAlign: 'center' }} onClick={this.handleCloseDialog}>Закрыть</Button>
                                     </DialogActions>

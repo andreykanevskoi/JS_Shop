@@ -61,10 +61,11 @@ function userRoutes(app, db) {
     });
   });
 
-  app.get('/auth', (req, res) => {
+  app.post('/auth', (req, res) => {
+    console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
-
+    console.log(`email: ${email} password: ${password}`);
     const sqlQuery = `SELECT USER_ID, USER_EMAIL FROM SHOP.USER WHERE USER_EMAIL = "${email}" AND USER_PASSWORD = "${password}";`;
     db.query(sqlQuery, (err, result) => {
       if (err) {

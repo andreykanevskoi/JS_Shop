@@ -14,6 +14,7 @@ const findRoute = require('./routes/index.js');
 app.use(express.static('dist'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const connection = mysql.createConnection(dbConfig);
 
