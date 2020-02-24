@@ -43,25 +43,23 @@ export default class Table extends Component {
     }
 
     return (
-      <div>
-        <DataTable 
-          selectable 
-          shadow={0} 
-          rows={data} 
-          style={{ width: '50%' }}
-          rowKeyColumn='PRODUCT_ID'
-          >
-          <TableHeader numeric name="PRODUCT_ID" tooltip="Артикул">
-            PRODUCT_ID
+      <DataTable
+        selectable
+        shadow={0}
+        rows={data}
+        style={{width: '90%'}}
+        rowKeyColumn='PRODUCT_ID'
+      >
+        <TableHeader numeric name="PRODUCT_ID" tooltip="Артикул">
+          PRODUCT_ID
           </TableHeader>
-          <TableHeader name="PRODUCT_NAME" tooltip="Название товара">
-            PRODUCT_NAME
+        <TableHeader name="PRODUCT_NAME" tooltip="Название товара">
+          PRODUCT_NAME
           </TableHeader>
-          <TableHeader name="PRODUCT_DESC" tooltip="Описание товара">
-            PRODUCT_DESC
+        <TableHeader name="PRODUCT_DESC" tooltip="Описание товара">
+          PRODUCT_DESC
           </TableHeader>
-        </DataTable>
-      </div>
+      </DataTable>
     );
   }
 }

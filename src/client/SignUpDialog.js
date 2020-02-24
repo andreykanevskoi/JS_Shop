@@ -1,55 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  Layout, Header, Navigation, Drawer,
-  Content, Button, Dialog, DialogActions,
-  DialogTitle, DialogContent, Textfield, Chip
+  Button, Dialog, DialogActions,
+  DialogTitle, DialogContent, Textfield
 } from 'react-mdl';
 
-function SignUpDialog(props) {
+export default function SignUpDialog(props) {
   return (
-    <Dialog open={props.openSignInDialog}>
-      <DialogTitle>Вход</DialogTitle>
+    <Dialog open={props.openSignUpDialog}>
+      <DialogTitle>Регистрация</DialogTitle>
       <DialogContent>
         <div>
           <Textfield
-            id="txtEmail"
-            onChange={props.handleEmailTextfieldChange}
-            label=""
-            style={{ width: '230px' }}
+            floatingLabel
+            onChange={props.handleNewEmailTextfieldChange}
+            label="Новый e-mail..."
+            style={{paddingTop: '50px'}}
           />
         </div>
         <div>
           <Textfield
-            id="txtPassword"
-            onChange={props.handlePasswordTextfieldChange}
-            label=""
-            style={{ width: '230px' }}
+            floatingLabel
+            onChange={props.handleNewPasswordTextfieldChange}
+            label="Новый пароль..."
+            style={{paddingTop: '50px'}}
           />
         </div>
       </DialogContent>
       <DialogActions fullWidth>
-        <Button
-          colored
-          raised
-          ripple
-          style={{ marginBottom: '5px', textAlign: 'center' }}
-          onClick={props.handleSendAuthRequest}
-        > Войти </Button>
-
-        <Button 
-          colored 
-          raised 
-          ripple 
-          style={{ marginBottom: '5px', textAlign: 'center' }} 
-          onClick={props.handleOpenSignUpDialog}
-        > Зарегистрироваться </Button>
-
-        <Button 
-          ripple 
-          style={{ textAlign: 'center' }} 
-          onClick={props.handlecloseSignInDialog}
-        > Закрыть </Button>
-              </DialogActions>
+        <Button colored raised ripple style={{ marginBottom: '5px', textAlign: 'center',  }} onClick={props.handleRegistration}>Зарегистрироваться</Button>
+        <Button ripple style={{ textAlign: 'center' }} onClick={props.handleCloseSignUpDialog}>Закрыть</Button>
+      </DialogActions>
     </Dialog>
   )
 }
