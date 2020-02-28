@@ -14,7 +14,7 @@ Cart.belongsTo(User, {
   }
 });
 
-Cart.belongsToMany(Product, {through: 'CartToProduct', foreignKey: 'PRODUCT_ID'});
+Cart.belongsToMany(Product, {through: 'CartToProduct', foreignKey: 'CART_ID'});
 Product.belongsToMany(Cart, {through: 'CartToProduct', foreignKey: 'PRODUCT_ID'});
 
 Cart.findAll({
