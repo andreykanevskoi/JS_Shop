@@ -1,0 +1,34 @@
+[
+  {
+    "USER_ID": 1,
+    "CART_ID": 1,
+    "Products": [
+      {
+        "PRODUCT_ID": 1,
+        "PRODUCT_DESC": "Очень вкусные!",
+        "PRODUCT_NAME": "Помидоры",
+        "CartToProduct": {
+          "CART_ID": 1,
+          "PRODUCT_AMOUNT": 2,
+          "PRODUCT_ID": 1
+        }
+      }
+    ]
+  },
+  {
+    "USER_ID": 3,
+    "CART_ID": 2,
+    "Products": [
+      {
+        "PRODUCT_ID": 2,
+        "PRODUCT_DESC": "Свежайшее!",
+        "PRODUCT_NAME": "Молоко",
+        "CartToProduct": {
+          "CART_ID": 1,
+          "PRODUCT_AMOUNT": 3,
+          "PRODUCT_ID": 2
+        }
+      }
+    ]
+  }
+]
