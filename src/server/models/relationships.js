@@ -4,16 +4,20 @@ const Product = require('./product');
 const CartToProduct = require('./cartToProduct');
 
 User.hasOne(Cart, {
-  foreignKey: 'USER_ID'
+  foreignKey: {
+    name: "USER_ID"
+  }
 });
-Cart.belongsTo(User);
+Cart.belongsTo(User, {
+  foreignKey: {
+    name: "USER_ID"
+  }
+});
 
-Cart.hasMany(CartToProduct, {
-  foreignKey: "CART_ID"
-});
-CartToProduct.belongsTo(Cart);
+Cart.belongsToMany(Product, {through: 'CartToProduct', foreignKey: 'PRODUCT_ID'});
+Product.belongsToMany(Cart, {through: 'CartToProduct', foreignKey: 'PRODUCT_ID'});
 
-Product.hasMany(CartToProduct, {
-  foreignKey: 'PRODUCT_ID'
-});
-CartToProduct.belongsTo(Product);
+Cart.findAll({
+  include: Product
+}).then((Carts) => {console.log(JSON.stringify(Carts))});
+

@@ -1,11 +1,16 @@
 const { DataTypes } = require('sequelize');
 var sequelize = require('./dbModel');
+const Cart = require('./cart');
+const Product = require('./product');
 
 const CartToProduct = sequelize.define('CartToProduct', {
     CART_ID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      references: {
+        model: Cart,
+        key: `CART_ID`
+      }
     },
     PRODUCT_AMOUNT: {
       type: DataTypes.INTEGER,
@@ -14,7 +19,10 @@ const CartToProduct = sequelize.define('CartToProduct', {
     PRODUCT_ID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      references: {
+        model: Product,
+        key: `PRODUCT_ID`
+      }
     }
   }, {
     tableName: 'CART_TO_PRODUCT',
