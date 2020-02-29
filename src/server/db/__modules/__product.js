@@ -1,26 +1,25 @@
 const { DataTypes } = require('sequelize');
-var sequelize = require('./dbModel');
+var sequelize = require('./__dbModel');
 
-const User = sequelize.define('User', {
-    USER_ID: {
+const Product = sequelize.define('Product', {
+    PRODUCT_ID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    USER_EMAIL: {
+    PRODUCT_DESC: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
-    USER_PASSWORD: {
+    PRODUCT_NAME: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     }
   }, {
-    tableName: 'USER',
+    tableName: 'PRODUCT',
     timestamps: false
   }
 )
 
-module.exports = User;
+module.exports = Product;

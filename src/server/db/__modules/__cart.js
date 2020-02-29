@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
-var sequelize = require('./dbModel');
-const User = require('./user');
+var sequelize = require('./__dbModel');
+const User = require('./__user');
 
 const Cart = sequelize.define('Cart', {
     USER_ID: {

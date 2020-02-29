@@ -1,7 +1,7 @@
-const User = require('./user');
-const Cart = require('./cart');
-const Product = require('./product');
-const CartToProduct = require('./cartToProduct');
+const User = require('./__user');
+const Cart = require('./__cart');
+const Product = require('./__product');
+const CartToProduct = require('./__cartToProduct');
 
 User.hasOne(Cart, {
   foreignKey: {

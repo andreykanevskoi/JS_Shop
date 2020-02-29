@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const dbInfo = require('./dbInfo');
+const dbInfo = require('./db_info');
 
 module.exports = new Sequelize(
   dbInfo.database, 

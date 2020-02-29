@@ -1,3 +1,6 @@
+const models = require('../db/models');
+const User = models.User;
+
 function userRoutes(app, db) {
   app.put('/users/:id', (req, res) => {
     const user = {
@@ -61,16 +64,55 @@ function userRoutes(app, db) {
     });
   });
 
-  app.post('/auth', (req, res) => {
+  app.post('/_auth', (req, res) => {
     console.log(req.body);
-    const email = req.body.email;
-    const password = req.body.password;
+    const { email } = req.body;
+    const { password } = req.body.password;
+    User.findOne({
+      where: {
+        USER_EMAIL: email,
+        USER_PASSWORD: password
+      },
+      attributes: ['USER_ID']
+    }).then((results) => {
+      
+    })
     console.log(`email: ${email} password: ${password}`);
     const sqlQuery = `SELECT USER_ID, USER_EMAIL FROM SHOP.USER WHERE USER_EMAIL = "${email}" AND USER_PASSWORD = "${password}";`;
     db.query(sqlQuery, (err, result) => {
       if (err) {
         res.send({ id, db_opr: 'SELECT', status: false, msg: 'db error' });
-      } 
+      }
+      else {
+        if (result[0] == undefined) {
+          res.send({
+            id: null, email: email, db_opr: 'SELECT', status: false, msg: "user doesn't exist"
+          });
+          return;
+        }
+        const item = JSON.parse(JSON.stringify(result[0]));
+        if (item !== undefined) {
+          res.send({
+            id: item.USER_ID,
+            email: item.USER_EMAIL,
+            db_opr: 'SELECT',
+            status: true
+          });
+        }
+      }
+    });
+  })
+
+  app.post('/auth', (req, res) => {
+    console.log(req.body);
+    const { email } = req.body;
+    const { password } = req.body.password;
+    console.log(`email: ${email} password: ${password}`);
+    const sqlQuery = `SELECT USER_ID, USER_EMAIL FROM SHOP.USER WHERE USER_EMAIL = "${email}" AND USER_PASSWORD = "${password}";`;
+    db.query(sqlQuery, (err, result) => {
+      if (err) {
+        res.send({ id, db_opr: 'SELECT', status: false, msg: 'db error' });
+      }
       else {
         if (result[0] == undefined) {
           res.send({
@@ -85,9 +127,6 @@ function userRoutes(app, db) {
           });
       }
     });
-
-
-
   })
 }
 
