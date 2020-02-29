@@ -18,10 +18,11 @@ app.use(bodyParser.json());
 // const connection = mysql.createConnection(dbConfig);
 
 const db_connect = require('./db/db_model');
+const db_models = require('./db/models');
 
 db_connect.authenticate()
   .then(() => {
-    findRoute(app, connection);
+    findRoute(app, db_models);
     app.listen(process.env.PORT || 8080, () => {
       console.log(`Sequelize works...`);
       console.log(`Listening on port ${process.env.PORT || 8080}!`);

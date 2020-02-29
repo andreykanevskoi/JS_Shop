@@ -16,13 +16,12 @@ export default class Table extends Component {
   componentDidMount() {
     fetch('/api/products')
       .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({ products: result.products });
-        },
-        (err) => {
-          this.setState({ products: null, status: false, error: err });
-        });
+      .then((result) => {
+        this.setState({ products: result.products });
+      })
+      .catch((err) => {
+        this.setState({ products: null, status: false, error: err });
+      });
   }
 
   render() {
@@ -47,7 +46,7 @@ export default class Table extends Component {
         selectable
         shadow={0}
         rows={data}
-        style={{width: '90%'}}
+        style={{ width: '90%' }}
         rowKeyColumn='PRODUCT_ID'
       >
         <TableHeader numeric name="PRODUCT_ID" tooltip="Артикул">

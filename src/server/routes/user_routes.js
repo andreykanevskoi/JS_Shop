@@ -1,7 +1,7 @@
 const models = require('../db/models');
 const User = models.User;
 
-function userRoutes(app, db) {
+function userRoutes(app, db_models, db = undefined) {
   app.put('/users/:id', (req, res) => {
     const user = {
       id: req.params.id,
@@ -64,70 +64,66 @@ function userRoutes(app, db) {
     });
   });
 
-  app.post('/_auth', (req, res) => {
-    console.log(req.body);
-    const { email } = req.body;
-    const { password } = req.body.password;
+  app.post('/auth', (req, res) => {
+    const { email, password } = req.body;
+
     User.findOne({
       where: {
         USER_EMAIL: email,
         USER_PASSWORD: password
       },
       attributes: ['USER_ID']
-    }).then((results) => {
-      
     })
-    console.log(`email: ${email} password: ${password}`);
-    const sqlQuery = `SELECT USER_ID, USER_EMAIL FROM SHOP.USER WHERE USER_EMAIL = "${email}" AND USER_PASSWORD = "${password}";`;
-    db.query(sqlQuery, (err, result) => {
-      if (err) {
-        res.send({ id, db_opr: 'SELECT', status: false, msg: 'db error' });
+    .then((results) => {
+      if (results == null) {
+        res.send({
+          id: null, email: email, db_opr: 'SELECT', status: false, msg: "user doesn't exist"
+        });
+        return;
       }
       else {
-        if (result[0] == undefined) {
-          res.send({
-            id: null, email: email, db_opr: 'SELECT', status: false, msg: "user doesn't exist"
-          });
-          return;
-        }
-        const item = JSON.parse(JSON.stringify(result[0]));
-        if (item !== undefined) {
-          res.send({
-            id: item.USER_ID,
-            email: item.USER_EMAIL,
-            db_opr: 'SELECT',
-            status: true
-          });
-        }
+        res.send({
+          id: results.USER_ID,
+          email: email,
+          db_opr: 'SELECT',
+          status: true
+        });
       }
-    });
-  })
+      console.log(results[0]);
+    })
+    .catch((err) => {
+      res.send({
+        id: null, email: email, db_opr: 'SELECT', status: false, msg: "db error"
+      });
+    })
+    return;
+  });
 
-  app.post('/auth', (req, res) => {
-    console.log(req.body);
-    const { email } = req.body;
-    const { password } = req.body.password;
-    console.log(`email: ${email} password: ${password}`);
-    const sqlQuery = `SELECT USER_ID, USER_EMAIL FROM SHOP.USER WHERE USER_EMAIL = "${email}" AND USER_PASSWORD = "${password}";`;
-    db.query(sqlQuery, (err, result) => {
-      if (err) {
-        res.send({ id, db_opr: 'SELECT', status: false, msg: 'db error' });
-      }
-      else {
-        if (result[0] == undefined) {
-          res.send({
-            id: null, email: email, db_opr: 'SELECT', status: false, msg: "user doesn't exist"
-          });
-          return;
-        }
-        const item = JSON.parse(JSON.stringify(result[0]));
-        if (item != undefined)
-          res.send({
-            id: item.USER_ID, email: item.USER_EMAIL, db_opr: 'SELECT', status: true
-          });
-      }
-    });
-  })
+  // app.post('/_auth', (req, res) => {
+  //   console.log(req.body);
+  //   const { email } = req.body;
+  //   const { password } = req.body.password;
+  //   console.log(`email: ${email} password: ${password}`);
+  //   const sqlQuery = `SELECT USER_ID, USER_EMAIL FROM SHOP.USER WHERE USER_EMAIL = "${email}" AND USER_PASSWORD = "${password}";`;
+  //   db.query(sqlQuery, (err, result) => {
+  //     if (err) {
+  //       res.send({ id, db_opr: 'SELECT', status: false, msg: 'db error' });
+  //     }
+  //     else {
+  //       if (result[0] == undefined) {
+  //         res.send({
+  //           id: null, email: email, db_opr: 'SELECT', status: false, msg: "user doesn't exist"
+  //         });
+  //         return;
+  //       }
+  //       const item = JSON.parse(JSON.stringify(result[0]));
+  //       if (item != undefined)
+  //         res.send({
+  //           id: item.USER_ID, email: item.USER_EMAIL, db_opr: 'SELECT', status: true
+  //         });
+  //     }
+  //   });
+  // })
 }
 
 module.exports = userRoutes;
