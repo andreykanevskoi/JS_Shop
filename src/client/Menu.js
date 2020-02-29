@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Layout, Header, Navigation, Drawer,
-  Content, Button, Box, Dialog, DialogActions,
+  Content, Button, FABButton, Icon, Box, Dialog, DialogActions,
   DialogTitle, DialogContent, Textfield, Chip
 } from 'react-mdl';
 
@@ -187,9 +187,17 @@ export default class Menu extends Component {
               </div>
             </Navigation>
           </Header>
-          <Content>
-            <div style={{ display: 'inline-block', width: '50%', height: '100%', overflowY: 'scroll' }}>
-              <Table />
+          <Content >
+            <div style={{  width: '100%', height: '99.7%' }}>
+              <div style={{ float: 'left', position: 'inline-block', width: '80%', display: 'justify', border: '1px solid black', height: '100%', overflowY: 'scroll' }}>
+                <Table />
+              </div>
+              <div style={{ display: 'block', alignItems: 'center', justifyContent: 'center', float: 'right', position: 'inline-block', width: '19.7%', height: '50%'}}>
+                <Button style={{ }} colored raised ripple>Добавить в Корзину</Button><br/>
+                <Button style={{ }} colored raised ripple>Добавить в Корзину</Button><br/>
+                <Button style={{ }} colored raised ripple>Добавить в Корзину</Button><br/>
+
+              </div>
             </div>
           </Content>
         </Layout>
