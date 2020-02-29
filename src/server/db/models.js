@@ -21,6 +21,7 @@ const Cart = sequelize.define(
   }
 );
 
+
 const Product = sequelize.define(
   'Product',
   {
