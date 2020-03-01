@@ -22,6 +22,7 @@ export default function SignUpDialog(props) {
             floatingLabel
             onChange={props.handleNewPasswordTextfieldChange}
             label="Новый пароль..."
+            type='password'
             style={{paddingTop: '50px'}}
           />
         </div>
