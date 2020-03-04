@@ -43,19 +43,18 @@ export default class Table extends Component {
 
     return (
       <DataTable
-        selectable
         shadow={0}
         rows={data}
-        style={{ width: '90%' }}
+        style={{ width: '99.7%' }}
         rowKeyColumn='PRODUCT_ID'
       >
-        <TableHeader numeric name="PRODUCT_ID" tooltip="Артикул">
+        <TableHeader style={{ width: '10px'}} numeric name="PRODUCT_ID" tooltip="Артикул">
           PRODUCT_ID
           </TableHeader>
-        <TableHeader name="PRODUCT_NAME" tooltip="Название товара">
+        <TableHeader style={{ width: '10px'}} name="PRODUCT_NAME" tooltip="Название товара">
           PRODUCT_NAME
           </TableHeader>
-        <TableHeader name="PRODUCT_DESC" tooltip="Описание товара">
+        <TableHeader style={{ width: '10px'}} name="PRODUCT_DESC" tooltip="Описание товара">
           PRODUCT_DESC
           </TableHeader>
       </DataTable>

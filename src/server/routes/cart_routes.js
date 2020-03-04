@@ -22,7 +22,7 @@ function cartRoutes(app, db_models) {
         }]
       })
       .then((cartProducts) => {
-        var Products = Object.assign({}, cartProducts);
+        var Products = JSON.parse(JSON.stringify(cartProducts));
         Products = Products[0].Products;
         Products.forEach((prod) => {
           const amount = prod.CartToProduct.PRODUCT_AMOUNT;

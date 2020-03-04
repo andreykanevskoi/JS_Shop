@@ -33,9 +33,7 @@ export default function SignInDialog(props) {
           style={{ marginBottom: '5px', textAlign: 'center' }}
           onClick={props.handleSendAuthRequest}
         >
-          {' '}
           Войти
-          {' '}
         </Button>
 
         <Button
@@ -45,9 +43,7 @@ export default function SignInDialog(props) {
           style={{ marginBottom: '5px', textAlign: 'center' }}
           onClick={props.handleOpenSignUpDialog}
         >
-          {' '}
           Зарегистрироваться
-          {' '}
         </Button>
 
         <Button
@@ -55,9 +51,7 @@ export default function SignInDialog(props) {
           style={{ textAlign: 'center' }}
           onClick={props.handleCloseSignInDialog}
         >
-          {' '}
           Закрыть
-          {' '}
         </Button>
       </DialogActions>
     </Dialog>
