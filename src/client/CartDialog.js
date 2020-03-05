@@ -19,7 +19,6 @@ export default class CartDialog extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.user_id !== prevProps.user_id) {
-      alert('oops');
       this.state.user_id = this.props.user_id;
       if (this.state.user_id >= 0) {
         fetch('api/cart', {
