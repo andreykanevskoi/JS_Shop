@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Layout, Header, Navigation, Content, Button, Tabl, FABButton
+  Layout, Header, Navigation, Content, Button, FABButton
 } from 'react-mdl';
-
-import 'react-mdl/extra/material';
-import 'react-mdl/extra/material.css';
 
 import UserTitle from './UserTitle';
 import Table from './Table';
 import SignInDialog from './SignInDialog';
 import SignUpDialog from './SignUpDialog';
 import CartDialog from './CartDialog';
-
-// import EnhancedTable from './__TableExample';
-
 
 export default class Menu extends Component {
   constructor(props) {
@@ -220,7 +214,7 @@ export default class Menu extends Component {
           <Content >
             <div style={{ width: '100%', height: '99.7%' }}>
               <div style={{ float: 'left', position: 'inline-block', width: '50%', display: 'justify', border: '1px solid black', height: '100%', overflowY: 'scroll' }}>
-                <Table />
+                <Table user_id={this.user_id} isSelectable={this.state.isLogin}/>
               </div>
             </div>
           </Content>

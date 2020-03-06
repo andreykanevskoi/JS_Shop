@@ -1,5 +1,4 @@
 function userRoutes(app, db_models) {
-
   // registration
   app.post('/reg', (req, res) => {
     const { email, password } = req.body;
@@ -34,7 +33,7 @@ function userRoutes(app, db_models) {
   app.post('/auth', (req, res) => {
     const { email, password } = req.body;
 
-    User.findOne({
+    db_models.User.findOne({
       where: {
         USER_EMAIL: email,
         USER_PASSWORD: password

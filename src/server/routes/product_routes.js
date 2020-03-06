@@ -18,5 +18,4 @@ function productRoutes(app, db_models, db = undefined) {
   });
 }
 
-
 module.exports = productRoutes;
