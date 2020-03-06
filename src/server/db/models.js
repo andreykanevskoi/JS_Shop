@@ -120,4 +120,4 @@ Product.belongsToMany(Cart, {
   foreignKey: 'PRODUCT_ID'
 });
 
-module.exports = { User, Cart, Product, sequelize };
+module.exports = { User, Cart, Product, CartToProduct, sequelize };

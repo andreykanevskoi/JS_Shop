@@ -41,6 +41,82 @@ function cartRoutes(app, db_models) {
           })
       })
   });
+
+  // delete product(s) from user's cart
+  app.delete('/cart', (req, res) => {
+
+    var { id, products } = req.body;
+
+    products = JSON.parse(products);
+
+    db_models.Cart.findOne({
+      where: {
+        USER_ID: id
+      }
+    })
+      .then((db_result) => {
+        return db_result.CART_ID;
+      })
+      .then((cart_id) => {
+        products.forEach((product) => {
+          db_models.CartToProduct.destroy({
+            where: {
+              PRODUCT_ID: product.id,
+              CART_ID: cart_id
+            }
+          })
+        });
+        res.send({
+          db_opr: 'DELETE',
+          status: true
+        });
+      })
+      .catch((err) => {
+        res.send({
+          db_opr: 'DELETE',
+          status: false,
+          err: err
+        });
+      })
+  })
+
+  // add new product(s) to user's cart
+  app.put('/cart', (req, res) => {
+    var { id, products } = req.body;
+
+    products = JSON.parse(products);
+
+    db_models.Cart.findOne({
+      where: {
+        USER_ID: id
+      }
+    })
+      .then((db_result) => {
+        return db_result.CART_ID;
+      })
+      .then((cart_id) => {
+        products.forEach((product) => {
+          db_models.CartToProduct.create({
+            CART_ID: cart_id,
+            PRODUCT_ID: product.id,
+            PRODUCT_AMOUNT: product.amount
+          })
+        });
+        res.send({
+          db_opr: 'INSERT',
+          status: true
+        });
+      })
+      .catch((err) => {
+        res.send({
+          db_opr: 'INSERT',
+          status: false,
+          err: err
+        });
+      })
+
+  })
+
 }
 
 module.exports = cartRoutes;

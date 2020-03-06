@@ -15,6 +15,9 @@ function userRoutes(app, db_models) {
           db_opr: 'INSERT',
           status: true
         })
+        db_models.Cart.create({
+          USER_ID: new_user.USER_ID,
+        })
       })
       .catch((err) => {
         res.send({
