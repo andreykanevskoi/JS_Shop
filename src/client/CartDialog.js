@@ -1,3 +1,11 @@
+/*
+    Файл        : CartDialog.js
+    Автор       : Каневской Андрей 
+    Описание    : Окно, содержащее товары пользователя.
+    
+    2020г.
+*/
+
 import React, { Component } from 'react';
 import {
   DataTable, TableHeader, Button, Dialog, DialogActions,

@@ -1,3 +1,11 @@
+/*
+    Файл        : SignUpDialog.js
+    Автор       : Каневской Андрей 
+    Описание    : Всплывающее окно регистрации.
+    
+    2020г.
+*/
+
 import React from 'react';
 import {
   Button, Dialog, DialogActions,

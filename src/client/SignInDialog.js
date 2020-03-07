@@ -1,3 +1,11 @@
+/*
+    Файл        : SignInDialog.js
+    Автор       : Каневской Андрей 
+    Описание    : Всплывающее окно авторизации.
+    
+    2020г.
+*/
+
 import React from 'react';
 import {
   Button, Dialog, DialogActions,
