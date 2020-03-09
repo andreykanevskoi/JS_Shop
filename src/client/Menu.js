@@ -1,5 +1,5 @@
 /*
-    Файл        : Menu.js
+    Файл        : client/Menu.js
     Автор       : Каневской Андрей 
     Описание    : Файл с описанием главной компоненты с контентом.
                 : Содержит в себе компоненту Layout модуля 'react-mdl'.
@@ -230,7 +230,7 @@ export default class Menu extends Component {
           <Content >
             <div style={{ width: '100%', height: '99.7%' }}>
               <div style={{ float: 'left', position: 'inline-block', width: '50%', display: 'justify', border: '1px solid black', height: '100%', overflowY: 'scroll' }}>
-                <Table user_id={this.user_id} isSelectable={this.state.isLogin}/>
+                <Table user_id={this.user_id} />
               </div>
             </div>
           </Content>

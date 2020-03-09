@@ -1,3 +1,11 @@
+/*
+    Файл        : server/routes/cart_routes.js
+    Автор       : Каневской Андрей 
+    Описание    : Содержит обработчики обращений к корзине.
+    
+    2020г.
+*/
+
 function cartRoutes(app, db_models) {
   // get all products from user's cart
   app.post('/cart', (req, res) => {

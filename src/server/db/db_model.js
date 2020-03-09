@@ -1,3 +1,11 @@
+/*
+    Файл        : server/db/db_model.js
+    Автор       : Каневской Андрей 
+    Описание    : Содержит объект ORM Sequelize для работы с БД.
+    
+    2020г.
+*/
+
 const { Sequelize } = require('sequelize');
 const dbInfo = require('./db_info');
 

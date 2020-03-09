@@ -1,3 +1,11 @@
+/*
+    Файл        : server/routes/product_routes.js
+    Автор       : Каневской Андрей 
+    Описание    : Содержит обработчики обращений к списку продуктов.
+    
+    2020г.
+*/
+
 function productRoutes(app, db_models, db = undefined) {
   app.get('/products', (req, res) => {
     db_models.Product.findAll()

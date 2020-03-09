@@ -1,3 +1,11 @@
+/*
+    Файл        : server/db/models.js
+    Автор       : Каневской Андрей 
+    Описание    : Содержит описание моделей ORM, связанных с БД.
+    
+    2020г.
+*/
+
 const { DataTypes } = require('sequelize');
 const sequelize = require('./db_model');
 

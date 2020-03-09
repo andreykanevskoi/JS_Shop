@@ -1,5 +1,5 @@
 /*
-    Файл        : CartDialog.js
+    Файл        : client/CartDialog.js
     Автор       : Каневской Андрей 
     Описание    : Окно, содержащее товары пользователя.
     
@@ -22,7 +22,11 @@ export default class CartDialog extends Component {
     this.state = {
       products: [],
     };
+    this.emptyFunc = this.emptyFunc.bind(this);
+  }
 
+  emptyFunc() {
+    alert('В разработке!');
   }
 
   componentDidUpdate(prevProps) {
@@ -76,8 +80,8 @@ export default class CartDialog extends Component {
           </DataTable>
         </DialogContent>
         <DialogActions>
-          <Button ripple style={{ textAlign: 'center' }}>Удалить</Button>
-          <Button ripple style={{ textAlign: 'center' }}>Оформить заказ</Button>
+          <Button ripple style={{ textAlign: 'center' }} onClick={this.emptyFunc}>Удалить</Button>
+          <Button ripple style={{ textAlign: 'center' }} onClick={this.emptyFunc}>Оформить заказ</Button>
 
           <Button
             ripple

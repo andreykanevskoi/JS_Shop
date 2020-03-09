@@ -1,3 +1,12 @@
+/*
+    Файл        : server/routes/user_routes.js
+    Автор       : Каневской Андрей 
+    Описание    : Содержит обработчики обращений к таблице пользователей.
+    
+    2020г.
+*/
+
+
 function userRoutes(app, db_models) {
   // registration
   app.post('/reg', (req, res) => {

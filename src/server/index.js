@@ -1,24 +1,25 @@
+/*
+    Файл        : server/product_routes.js
+    Автор       : Каневской Андрей 
+    Описание    : Содержит инструкции по настройке и запуску сервера.
+                : Для конфигурации и запуска используется ExpressJS.
+    
+    2020г.
+*/
+
+
 const express = require('express');
-const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
-// const dbConfig = require('./config/db_info');
 const app = express();
-
-app.use(cors());
-
 const findRoute = require('./routes/index.js');
-
-app.use(express.static('dist'));
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-// const connection = mysql.createConnection(dbConfig);
-
 const db_connect = require('./db/db_model');
 const db_models = require('./db/models');
+
+app.use(cors());
+app.use(express.static('dist'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 db_connect.authenticate()
   .then(() => {
@@ -31,12 +32,3 @@ db_connect.authenticate()
   .catch((err) => {
     if (err) return console.log(err);
   });
-
-
-// connection.connect((err) => {
-//   if (err) return console.log(err);
-//   findRoute(app, connection);
-//   app.listen(process.env.PORT || 8080, () => {
-//     console.log(`Listening on port ${process.env.PORT || 8080}!`);
-//   });
-// });
