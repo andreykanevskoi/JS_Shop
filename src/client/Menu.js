@@ -150,8 +150,8 @@ export default class Menu extends Component {
   handleRegistration() {
     const txtEmail = this.state.newEmail;
     const txtPw = this.state.newPw;
-    const data = { email: txtEmail, pw: txtPw };
-    fetch('api/users', {
+    const data = { email: txtEmail, password: txtPw };
+    fetch('api/reg', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
